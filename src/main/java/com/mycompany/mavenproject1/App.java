@@ -192,7 +192,7 @@ public class App extends javax.swing.JFrame {
             }
         });
     }
-    String passWord = "123";
+    String passWord = "1234";
     String userName = "keto";
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
