@@ -5,11 +5,20 @@
  */
 package com.mycompany.mavenproject1;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.nio.charset.StandardCharsets;
 import javax.swing.*;
+import java.util.*;
 /**
  *
  * @author astr4
  */
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.*;
 public class App extends javax.swing.JFrame {
 
     /**
@@ -17,8 +26,13 @@ public class App extends javax.swing.JFrame {
      */
     public App() {
         initComponents();
+        Random rand = new Random();
+        String random = String.format("%04d", rand.nextInt(10000));
+        guvenlikLabel.setText(random);
     }
-
+    public static String readFile(String path, Charset encoding) throws IOException {
+		return Files.readString(Paths.get(path), encoding);
+	}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,17 +48,25 @@ public class App extends javax.swing.JFrame {
         passLabel = new javax.swing.JLabel();
         passTextField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        kayitButton = new javax.swing.JButton();
+        gLabel = new javax.swing.JLabel();
+        guvenlikTextField = new javax.swing.JTextField();
+        guvenlikLabel = new javax.swing.JLabel();
+        yenileButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        loginButton.setText("Login");
+        loginButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        loginButton.setText("Giriş yap");
         loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loginButtonActionPerformed(evt);
             }
         });
 
-        usernameLabel.setText("Username:");
+        usernameLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        usernameLabel.setForeground(new java.awt.Color(255, 0, 51));
+        usernameLabel.setText("Tc Kimlik No:");
 
         usernameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -52,7 +74,9 @@ public class App extends javax.swing.JFrame {
             }
         });
 
-        passLabel.setText("Password:");
+        passLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        passLabel.setForeground(new java.awt.Color(255, 0, 51));
+        passLabel.setText("Şifre:");
 
         passTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,28 +93,78 @@ public class App extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(51, 51, 255));
         jLabel1.setText("Giriş");
 
+        kayitButton.setFont(new java.awt.Font("Yu Gothic Medium", 0, 12)); // NOI18N
+        kayitButton.setText("Kayıtlı değilim (Kayıt oluştur)");
+        kayitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kayitButtonActionPerformed(evt);
+            }
+        });
+
+        gLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        gLabel.setForeground(new java.awt.Color(255, 0, 0));
+        gLabel.setText("Güvenlik Kodu*");
+
+        guvenlikTextField.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        guvenlikTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guvenlikTextFieldActionPerformed(evt);
+            }
+        });
+        guvenlikTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                guvenlikTextFieldKeyPressed(evt);
+            }
+        });
+
+        guvenlikLabel.setFont(new java.awt.Font("Tahoma", 0, 40)); // NOI18N
+        guvenlikLabel.setForeground(new java.awt.Color(51, 51, 255));
+
+        yenileButton.setText("Yenile");
+        yenileButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                yenileButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(loginButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(usernameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(loginButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(kayitButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel1))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(usernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(usernameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(usernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(passLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(passTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(guvenlikLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(32, 32, 32)
+                                                .addComponent(yenileButton)))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(gLabel)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(10, 10, 10)
+                                                .addComponent(guvenlikTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(0, 5, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(passLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(passTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(108, 108, 108)
+                        .addComponent(jLabel1)))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,12 +179,25 @@ public class App extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(passLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(passTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(gLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(guvenlikTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(guvenlikLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(yenileButton)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(kayitButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
@@ -118,11 +205,14 @@ public class App extends javax.swing.JFrame {
         String pass = passTextField.getText();
         // TODO add your handling code here:
         if (uName.equals(userName) && pass.equals(passWord)){
-            JOptionPane.showMessageDialog(null,"Sifre Dogru Hosgeldiniz...");
-            Bolum bolum = new Bolum();
-            bolum.setVisible(true);
-            this.dispose();
-            //App().setVisible(false);
+            if(guvenlikLabel.getText().equals(guvenlikTextField.getText())){
+                JOptionPane.showMessageDialog(null,"Sifre Dogru Hosgeldiniz...");
+                Bolum bolum = new Bolum();
+                bolum.setVisible(true);
+                this.dispose();
+            }
+            else
+                JOptionPane.showMessageDialog(null,"Güvenlik kodu yalnış girildi!");
         }
         else
             JOptionPane.showMessageDialog(null,"Gecersiz şifre girildi!");
@@ -142,20 +232,60 @@ public class App extends javax.swing.JFrame {
     private void passTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passTextFieldKeyPressed
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-             String uName = usernameTextField.getText();
-        String pass = passTextField.getText();
-        // TODO add your handling code here:
-        if (uName.equals(userName) && pass.equals(passWord)){
-            JOptionPane.showMessageDialog(null,"Sifre Dogru Hosgeldiniz...");
-            Bolum bolum = new Bolum();
-            bolum.setVisible(true);
-            this.dispose();
-            //App().setVisible(false);
-        }
-        else
-            JOptionPane.showMessageDialog(null,"Gecersiz şifre girildi!");
+            String uName = usernameTextField.getText();
+            String pass = passTextField.getText();
+            if (uName.equals(userName) && pass.equals(passWord)){
+                if(guvenlikLabel.getText().equals(guvenlikTextField.getText())){
+                    JOptionPane.showMessageDialog(null,"Sifre Dogru Hosgeldiniz...");
+                    Bolum bolum = new Bolum();
+                    bolum.setVisible(true);
+                    this.dispose();
+                }
+                else
+                    JOptionPane.showMessageDialog(null,"Güvenlik kodu yalnış girildi!");
+            }
+            else
+                JOptionPane.showMessageDialog(null,"Gecersiz Tc veya şifre girildi!");
         }
     }//GEN-LAST:event_passTextFieldKeyPressed
+
+    private void kayitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kayitButtonActionPerformed
+        // TODO add your handling code here:
+        Kayit kay = new Kayit();
+        kay.setVisible(true);
+        
+    }//GEN-LAST:event_kayitButtonActionPerformed
+
+    private void guvenlikTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guvenlikTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_guvenlikTextFieldActionPerformed
+
+    private void guvenlikTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_guvenlikTextFieldKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String uName = usernameTextField.getText();
+            String pass = passTextField.getText();
+            if (uName.equals(userName) && pass.equals(passWord)){
+                if(guvenlikLabel.getText().equals(guvenlikTextField.getText())){
+                    JOptionPane.showMessageDialog(null,"Sifre Dogru Hosgeldiniz...");
+                    Bolum bolum = new Bolum();
+                    bolum.setVisible(true);
+                    this.dispose();
+                }
+                else
+                    JOptionPane.showMessageDialog(null,"Güvenlik kodu yalnış girildi!");
+            }
+            else
+                JOptionPane.showMessageDialog(null,"Gecersiz şifre girildi!");
+        }
+    }//GEN-LAST:event_guvenlikTextFieldKeyPressed
+
+    private void yenileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yenileButtonActionPerformed
+        // TODO add your handling code here:
+        Random rand = new Random();
+        String random = String.format("%04d", rand.nextInt(10000));
+        guvenlikLabel.setText(random);
+    }//GEN-LAST:event_yenileButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -196,11 +326,16 @@ public class App extends javax.swing.JFrame {
     String userName = "keto";
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel gLabel;
+    javax.swing.JLabel guvenlikLabel;
+    private javax.swing.JTextField guvenlikTextField;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton kayitButton;
     private javax.swing.JButton loginButton;
     private javax.swing.JLabel passLabel;
     private javax.swing.JTextField passTextField;
     private javax.swing.JLabel usernameLabel;
     private javax.swing.JTextField usernameTextField;
+    private javax.swing.JButton yenileButton;
     // End of variables declaration//GEN-END:variables
 }
