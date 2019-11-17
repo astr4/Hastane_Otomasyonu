@@ -15,7 +15,10 @@ public class Bolum extends javax.swing.JFrame {
     /** Creates new form App2 */
     public Bolum() {
         initComponents();
+       
     }
+    Doctor doct = new Doctor();
+    
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -132,26 +135,48 @@ public class Bolum extends javax.swing.JFrame {
 
     private void fizyolojiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fizyolojiButtonActionPerformed
         // TODO add your handling code here:
-        Doctor doct = new Doctor();
         doct.setVisible(true);
         this.dispose();
+        doct.drCheckBox1.setText("Dr. Aydın Kuşum");
+        doct.drCheckBox2.setText("Yrd. Doç. Dr. Aslı Kara");
+        doct.drCheckBox3.setText("Doç. Dr. Hüseyin Gülmez");
     }//GEN-LAST:event_fizyolojiButtonActionPerformed
 
     private void norolojıButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_norolojıButtonActionPerformed
         // TODO add your handling code here:
-        //fizyolojiButton.setVisible(false);
+        doct.setVisible(true);
+        this.dispose();
+        doct.drCheckBox1.setText("Prof. Dr İhsan Avcı");
+        doct.drCheckBox2.setText("Uzman doktor Bedirhan Yılmaz");
+        doct.drCheckBox3.setText("Doç. Dr. Gizem Yalçınırmak");
+       
     }//GEN-LAST:event_norolojıButtonActionPerformed
 
     private void urolojıButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_urolojıButtonActionPerformed
         // TODO add your handling code here:
+        doct.setVisible(true);
+        this.dispose();
+        doct.drCheckBox1.setText("Dr. Kemal Keykubat ");
+        doct.drCheckBox2.setText("Doç. Dr. Mehmet Kor");
+        doct.drCheckBox3.setText("Prof Dr. Güzide Şakayık");
     }//GEN-LAST:event_urolojıButtonActionPerformed
 
     private void dahiliyelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dahiliyelButtonActionPerformed
         // TODO add your handling code here:
+        doct.setVisible(true);
+        this.dispose();
+        doct.drCheckBox1.setText("Dr. Cemre Kıyak");
+        doct.drCheckBox2.setText("Yrd. Doç. Dr. Orkun Çetinceviz");
+        doct.drCheckBox3.setText("Doç. Dr. Selda Acar");
     }//GEN-LAST:event_dahiliyelButtonActionPerformed
 
     private void psikolojiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_psikolojiButtonActionPerformed
         // TODO add your handling code here:
+        doct.setVisible(true);
+        this.dispose();
+        doct.drCheckBox1.setText("Yrd. Doç. Dr. Leyla Peksimetoğulları");
+        doct.drCheckBox2.setText("Dr. Ali Bayırgülü");
+        doct.drCheckBox3.setText("Doç. Dr. Alper Düzel");
     }//GEN-LAST:event_psikolojiButtonActionPerformed
 
     /**

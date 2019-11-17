@@ -49,7 +49,6 @@ public class Doctor extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         drCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        drCheckBox1.setText("Dr. Aydın Kuşum");
         drCheckBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 drCheckBox1ActionPerformed(evt);
@@ -68,7 +67,6 @@ public class Doctor extends javax.swing.JFrame {
         hourRadioButton2.setText("8:00");
 
         drCheckBox2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        drCheckBox2.setText("Yrd. Doç. Dr. Aslı Kara");
         drCheckBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 drCheckBox2ActionPerformed(evt);
@@ -76,7 +74,6 @@ public class Doctor extends javax.swing.JFrame {
         });
 
         drCheckBox3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        drCheckBox3.setText("Doç. Dr. Hüseyin Gülmez");
         drCheckBox3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 drCheckBox3ActionPerformed(evt);
@@ -226,9 +223,9 @@ public class Doctor extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton devamButton;
     private javax.swing.ButtonGroup docs;
-    private javax.swing.JCheckBox drCheckBox1;
-    private javax.swing.JCheckBox drCheckBox2;
-    private javax.swing.JCheckBox drCheckBox3;
+    javax.swing.JCheckBox drCheckBox1;
+    javax.swing.JCheckBox drCheckBox2;
+    javax.swing.JCheckBox drCheckBox3;
     private javax.swing.JRadioButton hourRadioButton1;
     private javax.swing.JRadioButton hourRadioButton2;
     private javax.swing.JRadioButton hourRadioButton3;
